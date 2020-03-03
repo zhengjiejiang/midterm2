@@ -36,27 +36,27 @@ export default class AppNavigation extends Component{
       <div>
       {page === LOGIN_PAGE_ID&&
       <LoginView
-      onchangepage = { (page)=>this.onChangePage(page) }
+      onPageChange = { this.onPageChange}
       />
   }
       {page === REGISTER_PAGE_ID&&
       <RegisterView
-      onchangepage = { (page)=>this.onChangePage(page) }
+      onPageChange = { this.onPageChange}
       />
   }
       {page === LIST_PAGE_ID &&
       <ListView
-      onPageChange={(page)=>this.onChangePage(page) }
+      onPageChange={ this.onPageChange}
       />
   }
       {page === EDIT_PAGE_ID &&
       <UpdateView
-      onPageChange={(page)=>this.onChangePage(page)}
+      onPageChange={ this.onPageChange}
       />
   }
       {page === VIEW_PAGE_ID &&
       <DetailView
-      onPageChange={(page)=>this.onChangePage(page)}
+      onPageChange={ this.onPageChange}
       />
   }
 

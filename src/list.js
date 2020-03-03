@@ -1,12 +1,19 @@
-
 import React, { Component } from 'react';
-import { TREE_ARR,EDIT_PAGE_ID,VIEW_PAGE_ID } from './constants';
+import { TREE_ARR,EDIT_PAGE_ID,VIEW_PAGE_ID,LOGIN_PAGE_ID} from './constants';
 
 export default class ListView extends Component{
   constructor(props){
     super(props);
+    let DbArry = localStorage.getItem("Tree_Arr")
+    if (DbArry=== undefined || DbArry === null){
+      DbArry =[];
+    }else {
+      DbArry = JSON.stringify(DbArry)
+
+    }
+
     this.state={
-      treeArr : JSON.parse(localStorage.getItem("Tree_Arr")),
+      treeArr : DbArry,
       searchTerm:"",
     }
 
@@ -30,6 +37,9 @@ export default class ListView extends Component{
       searchTerm:event.target.value,
     })
   }
+  onLogoutClick(event){
+    this.props.onPageChange(LOGIN_PAGE_ID);
+  }
 
 
   render(){
@@ -41,15 +51,17 @@ export default class ListView extends Component{
       <div>
       <h1>Tree List</h1>
       <input type="text" value={this.state.searchTerm} onChange={(event)=>this.onSearchChange(event)} />
+        <button onClick={(event)=>this.onSearchChange(event)}>search</button>
 
       <br />
 
       <TreeList treeArr={filteredtreeElementsArr} onViewClick={this.onViewClick} onEditClick={this.onEditClick}/>
+      <button onClick={(event)=>this.onLogoutClick(event)}>Logout</button>
+
       </div>
     );
   }
-  }
-
+}
 
   function TreeList(props){
     let treeElements = props.treeArr.map(
@@ -63,6 +75,7 @@ export default class ListView extends Component{
       </tr>
     )
     return(
+
       <table>
       <tr>
       <th>Tree Name</th>
@@ -71,4 +84,5 @@ export default class ListView extends Component{
       {treeElements}
       </table>
     )
-  }
+
+}

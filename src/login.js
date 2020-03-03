@@ -7,7 +7,7 @@ export default class LoginView extends Component{
     super(props);
 
     this.state={
-      error:"",
+      hasError:false,
       name:"",
       password:"",
       loggedInUserObj:null,
@@ -26,7 +26,7 @@ export default class LoginView extends Component{
 
   onNameChange(event){
       this.setState({
-        error:"",
+        hasError:"",
       })
       this.setState({
         name:event.target.value,
@@ -34,7 +34,7 @@ export default class LoginView extends Component{
     }
     onPasswordChange(event){
       this.setState({
-        error:"",
+        hasError:"",
       })
       this.setState({
         password:event.target.value,
@@ -43,46 +43,27 @@ export default class LoginView extends Component{
     onLoginButtonClick(event){
       event.preventDefault();
       const { name,password } = this.state;
-
-      let user = JSON.parse(localStorage.getItem("UserData"));
-      let userDatum = {};
-      let isFound = false;
-      if(user === null || user === "" || user === undefined ){
-        this.setState({
-          error:"User doesn't Exists"
-        })
-      }
-      else{
-      for (userDatum of user) {
-        if(name === userDatum.name && password === userDatum.password){
-          this.setState({
-            loggedInUserObj : userDatum,
-          })
-          localStorage.setItem("Logged-in-User",JSON.stringify(userDatum));
-          isFound = true;
-          break;
-        }
-      }
-      if(isFound === true){
-        alert("Logged in Successfully!")
-        this.props.onPageChange(LIST_PAGE_ID);
-      }
-      else{
-        this.setState({
-          error:"name or Password is incorrect!"
-        })
-      }
+      if(name ==="123" && password ==="123" ){
+         this.props.onPageChange(LIST_PAGE_ID)
+      } else{this.setState({
+          hasError : true
+      })
 
     }
-}
-    render(){
-      const { name,password,error } = this.state;
+  }
+
+
+  render(){
+      const { name,password,hasError } = this.state;
       return(
         <div className="login">
             <h1>Login</h1>
-            <div className="validation-error" style={{marginLeft:"26%"}}>
-                {error}
-            </div>
+            {hasError &&
+              <div>
+                    <strong> Name or password is wrong :(</strong>
+              </div>
+            }
+
             <br />
             <input
               type="text"

@@ -106,14 +106,6 @@ export default class LoginView extends Component{
     return(
       <div className="register">
               <h1>Register</h1>
-              <br />
-              {message === "Username, Email and Password is required!"}
-              <span className="validation-error" style={{marginLeft:"36%"}}>{message}</span>
-              :<span style={{color:'white',backgroundColor:"blue"}}>{message}</span>
-              }
-
-              <br />
-              <br />
               <input
                 type="text"
                 placeholder="First Name"
@@ -154,10 +146,10 @@ export default class LoginView extends Component{
               />
               <br />
               <br />
-              <button style={{marginLeft:"45%",padding:"0.3%",marginRight:"25%",marginTop:"3%",width:"10%"}} onClick={(event)=>{this.onSubmitClick(event)}}>Register</button>
+              <button onClick={(event)=>{this.onSubmitClick(event)}}>Register</button>
               <br />
               <br />
-              <button style={{marginLeft:"45%",padding:"0.3%",marginRight:"25%",marginTop:"3%"}} onClick={(event)=>{this.onLoginPageClick(event)}}>Already Registered?</button>
+              <button onClick={(event)=>{this.onLoginPageClick(event)}}>Login</button>
               <br />
               <br />
 
